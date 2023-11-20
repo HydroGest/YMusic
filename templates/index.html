@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN" class="mdui-theme-dark">
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="/static/main.js"></script>
+    <script src="/static/lrc.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.2/mdui.css">
+    <script src="https://unpkg.com/mdui@2.0.2/mdui.global.js"></script>
+
+    <title>YMusic</title>
+  </head>
+  <body class="mdui-theme-dark">
+<mdui-snackbar placement="top-start" id="snackbar">Photo archived</mdui-snackbar>
+      <mdui-top-app-bar scroll-behavior="elevate" style="position: fixed;">
+  <mdui-button-icon icon="library_music"></mdui-button-icon>
+  <mdui-top-app-bar-title>YMusic - <i id="musicTitle">未播放</i></mdui-top-app-bar-title>
+  <div style="flex-grow: 1"></div>
+  
+  <mdui-button-icon id="openDrawer" icon="format_list_numbered"></mdui-button-icon>
+</mdui-top-app-bar>
+<div class="placement" style="position: relative; overflow: hidden">
+    <br/><br/><br/>
+    <div style="margin-left:10%;margin-right:10%;margin-top:8%;">
+        <mdui-text-field id="search" variant="outlined" label="搜索歌曲">
+            <mdui-button-icon onclick="search()" slot="end-icon" icon="search"></mdui-button-icon>
+        </mdui-text-field>
+    </div>
+    <div style="margin-left:8%;margin-right:8%;margin-top:1%;">
+        <div id="loader" style="display:none;">
+            <center>
+                <mdui-circular-progress></mdui-circular-progress>
+            </center>
+        </div>
+        <mdui-list id="searchResult">
+            <center>
+                <div class="mdui-typo">
+                <p id="hitokoto">
+                    「
+                    <i id="hitokoto_text">:D 获取中...</i>
+                    」
+                </p>
+                </div>
+            </center>
+        </mdui-list>
+    
+    </div>
+
+
+<mdui-dialog close-on-overlay-click class="IRCMenu">
+  <mdui-top-app-bar slot="header">
+    <mdui-top-app-bar-title>&nbsp;&nbsp;歌词</mdui-top-app-bar-title>
+    <mdui-button-icon  style="transform: translateY(0px);" id="close_irc" icon="close"></mdui-button-icon>
+  </mdui-top-app-bar>
+  <div class="aplayer-lrc" style="height: 300px;overflow:hidden;">
+      <ul class="aplayer-lrc-contents" id="lrclist">
+          
+      </ul>
+  </div>
+  <center>   <mdui-button onclick="DownloadLRC();" slot="action" variant="text">下载歌词</mdui-button>
+  <mdui-button slot="action"  onclick="DownloadMP3();" variant="text">下载音乐</mdui-button></center>
+
+</mdui-dialog>
+
+
+<mdui-navigation-drawer placement="right" modal  close-on-esc close-on-overlay-click class="drawer" style="position: fixed;" contained>
+    <div style="margin-left:5%">    
+        <p>播放列表 - <a id="playcnt">0</a>首</p>
+        <mdui-list id="PlayList">
+             
+        </mdui-list>
+    </div>
+
+</mdui-navigation-drawer>
+
+
+
+
+<script>
+  const placement = document.querySelector(".placement")
+  const navigationDrawer = placement.querySelector(".drawer");
+  const openButton = document.querySelector('#openDrawer');
+
+  openButton.addEventListener("click", () => navigationDrawer.open = true);
+</script>
+
+<mdui-bottom-app-bar id="audio-box" style="position:fixed;bottom:0;">
+    <mdui-button-icon id="playPause" onclick="Pause()" variant="outlined" icon="play_arrow"></mdui-button-icon>
+    <mdui-button-icon id="skipForward" onclick="playPriv()" icon="skip_previous"></mdui-button-icon>
+    <mdui-button-icon id="skipBackward" onclick="playNext()" icon="skip_next"></mdui-button-icon>
+    <mdui-linear-progress id="progress" value="0" max="100"></mdui-linear-progress>&nbsp;&nbsp;&nbsp;
+    <small>
+        <div id="playTime">
+            00:00
+        </div> 
+        <div id="audioTime">
+            00:00
+        </div>
+    </small>
+    <mdui-button-icon id="show_irc" icon="keyboard_arrow_up"></mdui-button-icon>
+</mdui-bottom-app-bar>
+
+<script>
+  const dialog = document.querySelector(".IRCMenu");
+  const openIRC = document.querySelector("#show_irc");
+  const closeIRC = document.querySelector("#close_irc");
+  
+  openIRC.addEventListener("click", () => dialog.open = true);
+  closeIRC.addEventListener("click", () => dialog.open = false);
+</script>
+<script>
+  fetch('https://v1.hitokoto.cn?c=d')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.querySelector('#hitokoto_text')
+      hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+      hitokoto.innerText = data.hitokoto;
+    })
+    .catch(console.error)
+</script>
+
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+  </body>
+</html>

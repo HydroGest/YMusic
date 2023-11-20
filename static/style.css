@@ -1,0 +1,40 @@
+			ul{
+				transition-duration: 600ms;
+			}
+			ul, li{
+				list-style:none;
+				padding: 0;
+				margin: 0;
+			}
+			.aplayer-lrc-contents li.on{
+				color: #0e90d2;
+			}
+			.aplayer-lrc-contents li p{
+				overflow: hidden;
+				text-overflow: ellipsis;
+				height: 16px;
+				line-height: 16px;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				display: -webkit-box;
+				text-align: center;
+				margin-top: 0;
+				margin-bottom: 16px;
+			}
+			audio{
+				margin-top: 10px;
+			}
+ 
+            .aplayer-lrc:after,.aplayer-lrc:before {
+            position: absolute;
+            z-index: 1;
+            display: block;
+            overflow: hidden;
+            content: ' ';
+            width: 100%
+        }
+ 
+            .aplayer-lrc:before {
+                top: 25px;
+                height: 4%;
+            }
