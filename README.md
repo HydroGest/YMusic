@@ -1,5 +1,5 @@
 # YMusic
-A comfortable music client, based on Material Design 2.
+A comfortable music client, based on Material Design 3.
 
 ## Deployment
 
