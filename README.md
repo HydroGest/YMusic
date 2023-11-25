@@ -24,7 +24,7 @@ Before you work on your project, activate the corresponding environment:
 ### Install requirements
 
 ```shell
-pip install requirements.txt -r
+pip install -r requirements.txt
 ```
 
 ### Start!
@@ -35,4 +35,6 @@ flask run
 
 This launches a very simple builtin server, which is good enough for testing but probably not what you want to use in production.
 
-Now head over to http://127.0.0.1:5000/, and you should see your hello world greeting.
+Now head over to http://127.0.0.1:5000/.
+
+
